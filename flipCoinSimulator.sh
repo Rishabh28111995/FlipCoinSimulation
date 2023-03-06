@@ -2,22 +2,36 @@ echo "Welcome to Flip Coin Simulation Problem."
 
  headComes=0;
  tailComes=0;
- numOfFlips=8;
+ reqdWins=21;
 
-  for((i=1; i<=numOfFlips; i++))
-do  
+  while [[ $headComes -lt $reqdWins  &&  $tailcomes -lt $reqdWins ]]
+  do
+  
     flipResult=$((1+RANDOM%2));
  
    if [ $flipResult -eq 1 ]
    then 
-      echo "flip $i: Head"
+      
        ((headComes++))
    else
-      echo "flip $i: Tail"
+      
         ((tailComes++))
     fi 
-done
+  done
 
+if [ $headComes -eq $tailComes ]
+then
+ echo "It's a tie."
 
-echo "Head comes $headComes times."
-echo "Tail comes $tailComes times."
+else
+if [ $headComes -gt $tailComes ]
+then
+ winner="Head"
+diff=$(($headComes - $tailComes))
+else
+   winner="Tail"
+diff=$(($tailcomes - $headcomes))
+fi
+
+echo "Winner is $winner by $diff."
+fi
